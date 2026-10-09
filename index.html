@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Mahal 💌</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Dancing+Script:wght@500;600;700&display=swap');
+
+:root {
+  --pink: #ff6f91;
+  --deep: #d6336c;
+  --light: #fff0f5;
+  --paper: #fffdf7;
+  --text: #633447;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  color: var(--text);
+  background: linear-gradient(135deg, #ffe0e9, #fff3f5, #ffd6e5);
+  overflow-x: hidden;
+}
+
+button, input, textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 14px;
+}
+
+.card {
+  width: 100%;
+  max-width: 650px;
+  padding: 30px 24px;
+  border: 1px solid #ffffffb5;
+  border-radius: 26px;
+  background: #ffffffd9;
+  box-shadow: 0 15px 45px #b74a7030;
+  backdrop-filter: blur(10px);
+}
+
+.center {
+  text-align: center;
+}
+
+.emoji {
+  font-size: 55px;
+  margin-bottom: 10px;
+}
+
+h1, h2 {
+  color: var(--deep);
+}
+
+h1 {
+  font-size: clamp(25px, 5vw, 34px);
+  margin: 5px 0 10px;
+}
+
+.subtitle {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #966477;
+}
+
+input[type="password"] {
+  width: 100%;
+  padding: 14px;
+  margin: 15px 0 8px;
+  border: 1.5px solid #ffc1d2;
+  border-radius: 13px;
+  background: white;
+  text-align: center;
+  letter-spacing: 5px;
+  outline: none;
+}
+
+input:focus, textarea:focus {
+  border-color: var(--pink);
+}
+
+.primary-btn {
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #ff7195, #e83e76);
+  color: white;
+  padding: 13px 22px;
+  font-weight: 600;
+  box-shadow: 0 6px 16px #e83e7630;
+  transition: transform .2s;
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+}
+
+.full-btn {
+  width: 100%;
+  margin-top: 15px;
+}
+
+.hint {
+  margin: 12px 0 0;
+  color: #a06b80;
+  font-size: 12px;
+}
+
+.error {
+  color: #d62957;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+.progress-wrap {
+  height: 7px;
+  background: #ffe0e9;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 15px 0 24px;
+}
+
+.progress {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #ff91ad, #e83e76);
+  transition: width .3s;
+}
+
+.question {
+  padding: 18px 15px;
+  margin: 15px 0;
+  border: 1px solid #ffe0e9;
+  border-radius: 17px;
+  background: #fff9fb;
+}
+
+.question h3 {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.8;
+  margin: 0 0 13px;
+}
+
+.number {
+  color: var(--deep);
+  font-weight: 700;
+}
+
+.answers {
+  display: flex;
+  gap: 10px;
+}
+
+.answer {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ffc5d5;
+  border-radius: 12px;
+  text-align: center;
+  background: white;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.answer:has(input:checked) {
+  background: #ffe1ea;
+  border-color: var(--pink);
+  color: #c52e62;
+}
+
+.answer input {
+  accent-color: var(--deep);
+  margin-right: 5px;
+}
+
+.explanation {
+  display: none;
+  margin-top: 12px;
+}
+
+.explanation.show {
+  display: block;
+}
+
+.explanation label {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 7px;
+  color: #b52c60;
+  font-weight: 600;
+}
+
+.explanation textarea {
+  width: 100%;
+  min-height: 85px;
+  padding: 12px;
+  border: 1px solid #ffc5d5;
+  border-radius: 12px;
+  resize: vertical;
+  outline: none;
+  background: white;
+  font-size: 13px;
+}
+
+.small-note {
+  font-size: 12px;
+  color: #a06b80;
+  line-height: 1.7;
+}
+
+/* Envelope */
+#letterScreen {
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+}
+
+.envelope-heading {
+  text-align: center;
+}
+
+.envelope-heading h2 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 35px;
+  margin: 0;
+}
+
+.envelope-heading p {
+  font-size: 12px;
+  color: #966477;
+}
+
+.envelope-area {
+  position: relative;
+  width: min(340px, 88vw);
+  height: 255px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+  margin-top: 20px;
+}
+
+.envelope {
+  position: absolute;
+  bottom: 12px;
+  width: 100%;
+  height: 195px;
+  border-radius: 8px;
+  background: #f6a6bd;
+  box-shadow: 0 15px 30px #bb4d7130;
+}
+
+.envelope::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #ffc0d0;
+  clip-path: polygon(0 0, 50% 58%, 100% 0);
+  border-radius: 8px;
+  z-index: 4;
+}
+
+.envelope::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #ee85a5;
+  clip-path: polygon(0 100%, 0 0, 50% 54%, 100% 0, 100% 100%);
+  border-radius: 8px;
+  z-index: 3;
+}
+
+.paper {
+  position: absolute;
+  z-index: 2;
+  bottom: 25px;
+  left: 5%;
+  width: 90%;
+  height: 175px;
+  border-radius: 8px;
+  background: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Dancing Script', cursive;
+  font-size: 23px;
+  color: var(--deep);
+  box-shadow: 0 0 8px #00000010;
+  transition: transform 1s ease, height 1s ease;
+}
+
+.heart-button {
+  position: absolute;
+  z-index: 6;
+  left: 50%;
+  top: 51%;
+  transform: translate(-50%, -50%);
+  width: 62px;
+  height: 62px;
+  border: 3px solid #fff4f7;
+  border-radius: 50%;
+  background: #e83e76;
+  color: white;
+  font-size: 31px;
+  box-shadow: 0 5px 20px #b32a563b;
+  animation: heartbeat 1.2s infinite;
+}
+
+.heart-button:hover {
+  background: #d72e65;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.1); }
+}
+
+.envelope.open .paper {
+  transform: translateY(-155px);
+  height: 205px;
+}
+
+.envelope.open .heart-button {
+  opacity: 0;
+  pointer-events: none;
+  animation: none;
+  transition: opacity .3s;
+}
+
+.tap-note {
+  font-size: 13px;
+  color: #a04c6c;
+  text-align: center;
+}
+
+/* Love letter modal */
+.letter-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: #632b4680;
+  backdrop-filter: blur(5px);
+}
+
+.letter-overlay.show {
+  display: flex;
+  animation: fadeIn .5s;
+}
+
+.letter-paper {
+  width: 100%;
+  max-width: 520px;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  padding: 32px 24px;
+  border-radius: 8px;
+  border: 1px solid #f4dfb4;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      #fffdf7 0px,
+      #fffdf7 31px,
+      #f5e9dc 32px
+    );
+  box-shadow: 0 20px 60px #45182d50;
+  animation: rise .8s ease;
+}
+
+.letter-paper h2 {
+  text-align: center;
+  font-family: 'Dancing Script', cursive;
+  font-size: 35px;
+  margin: 0 0 20px;
+}
+
+.letter-body {
+  white-space: pre-line;
+  line-height: 2;
+  font-size: 13px;
+  color: #634447;
+}
+
+.signature {
+  font-family: 'Dancing Script', cursive;
+  font-size: 27px;
+  color: var(--deep);
+  margin-top: 20px;
+}
+
+.close-btn {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  margin-top: 20px;
+  border: none;
+  padding: 12px;
+  border-radius: 20px;
+  background: #ffe1ea;
+  color: #b52c60;
+  font-weight: 600;
+}
+
+@keyframes rise {
+  from { transform: translateY(100px) scale(.95); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.heart-float {
+  position: fixed;
+  bottom: -30px;
+  z-index: 0;
+  pointer-events: none;
+  animation: floatUp linear forwards;
+  opacity: .6;
+}
+
+@keyframes floatUp {
+  to {
+    transform: translateY(-110vh) rotate(35deg);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .card { padding: 23px 16px; }
+  .question { padding: 15px 12px; }
+  .letter-paper { padding: 27px 19px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD SCREEN -->
+<section id="passwordScreen" class="screen">
+  <div class="card center">
+    <div class="emoji">💌</div>
+    <h1>Hi, my mahal!</h1>
+    <p class="subtitle">
+      I made something special just for you.<br>
+      But first, you need to unlock my heart. ❤️
+    </p>
+
+    <form id="passwordForm">
+      <input
+        id="passwordInput"
+        type="password"
+        placeholder="Enter our secret password"
+        autocomplete="off"
+        required
+      >
+      <button class="primary-btn full-btn" type="submit">
+        Unlock My Heart 💗
+      </button>
+    </form>
+
+    <p class="hint">💡 Hint: Bday ko, bday mo, at our monthsary.</p>
+    <p id="passwordError" class="error"></p>
+  </div>
+</section>
+
+<!-- QUESTIONS SCREEN -->
+<section id="questionsScreen" class="screen hidden">
+  <div class="card">
+    <div class="center">
+      <div class="emoji">🥹💗</div>
+      <h1>Questions Before my Message</h1>
+      <p class="subtitle">
+        Yes or No lang ang sagot, mahal ha and if no,
+        paliwanag mo po kung bakit. 🥹
+      </p>
+    </div>
+
+    <div class="progress-wrap">
+      <div id="progress" class="progress"></div>
+    </div>
+    <p id="progressText" class="small-note center">0 of 10 answered</p>
+
+    <form id="questionsForm">
+      <div id="questionsContainer"></div>
+
+      <p class="small-note">
+        💗 Mahal, kapag No ang sagot mo, please explain kung bakit.
+        Required ang explanation bago makapag-send.
+      </p>
+
+      <button type="submit" class="primary-btn full-btn">
+        Send Answers 💌
+      </button>
+
+      <p id="formError" class="error center"></p>
+    </form>
+  </div>
+</section>
+
+<!-- ENVELOPE SCREEN -->
+<section id="letterScreen" class="screen hidden">
+  <div class="envelope-heading">
+    <h2>For you, my love 💗</h2>
+    <p>You answered all my questions. Now, open my heart.</p>
+  </div>
+
+  <div class="envelope-area">
+    <div id="envelope" class="envelope">
+      <div class="paper">A little message for you... 💌</div>
+      <button
+        id="heartButton"
+        class="heart-button"
+        aria-label="Open my love letter"
+        type="button"
+      >♥</button>
+    </div>
+  </div>
+
+  <p class="tap-note">Tap the heart in the middle of the envelope. 💕</p>
+</section>
+
+<!-- LOVE LETTER POPUP -->
+<div id="letterOverlay" class="letter-overlay">
+  <article class="letter-paper">
+    <h2>To My Mahal 💌</h2>
+
+    <div id="letterMessage" class="letter-body"></div>
+
+    <div class="signature">
+      Forever yours, ❤️
+      <br>
+      Your love
+    </div>
+
+    <button id="closeLetter" class="close-btn" type="button">
+      Close with love 💗
+    </button>
+  </article>
+</div>
+
+<script>
+/* ======================================
+   CUSTOMIZE YOUR LOVE LETTER HERE
+   Edit the message inside the backticks.
+====================================== */
+
+const LOVE_MESSAGE = `Hi, mahal ko. ❤️
+
+First of all, thank you for answering all my questions. I know hindi naman palaging madali ang relationship natin. May times na nag-aaway tayo, nagkaka-misunderstanding, at may mga moments na pareho tayong napapagod.
+
+Pero gusto kong malaman mo na mahal na mahal kita. Kahit hindi tayo perfect, I still want us to learn, grow, and become better together. Hindi ko naman hinihingi na maging perfect ka, kasi hindi rin naman ako perfect. Ang gusto ko lang ay patuloy nating piliin ang isa't isa, kahit may mga araw na mahirap.
+
+I'm sorry sa mga times na nasasaktan kita, sa mga pagkukulang ko, at sa mga moments na hindi ko naipapakita nang maayos kung gaano kita kamahal. I want to keep learning how to love you better.
+
+You are special to me, mahal. I appreciate the little things you do, the moments we share, and even the challenges that teach us to understand each other more.
+
+Kapag may problema tayo, sana piliin nating mag-usap kaysa mag-give up agad. Let's be honest with each other, listen to each other, and remember why we chose to love each other in the first place.
+
+I can't promise na magiging perfect ang lahat, pero I want to keep trying with you. I want more memories, more laughs, more lambing, and more moments na tayo lang ang nakakaintindi.
+
+Thank you for being part of my life. I hope we continue choosing each other, not just when everything is easy, but also when life gets difficult.
+
+Mahal na mahal kita, my love. Today, tomorrow, and sa mga susunod pang araw, I hope we keep growing together. ❤️
+
+Always remember: you're loved, you're appreciated, and you mean so much to me.
+
+I love you so much, mahal ko. 💋❤️`;
+
+
+/* ======================================
+   PASSWORD
+====================================== */
+
+const SECRET_PASSWORD = "191007";
+
+const passwordForm = document.getElementById("passwordForm");
+const passwordInput = document.getElementById("passwordInput");
+const passwordError = document.getElementById("passwordError");
+
+passwordForm.addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  if (passwordInput.value === SECRET_PASSWORD) {
+    document.getElementById("passwordScreen").classList.add("hidden");
+    document.getElementById("questionsScreen").classList.remove("hidden");
+    window.scrollTo(0, 0);
+  } else {
+    passwordError.textContent = "Wrong password, mahal. Try again. 🥺";
+    passwordInput.value = "";
+    passwordInput.focus();
+  }
+});
+
+
+/* ======================================
+   QUESTIONS
+====================================== */
+
+const questions = [
+  "Mahal, kung dumating yung time na hindi na ako tulad ng dati, pipiliin mo pa rin ba ako?",
+  "Kung dumating yung time na hindi na tayo masaya tulad ng dati, ipaglalaban mo pa rin ba tayo?",
+  "May chance ba na iwan mo ako kapag may dumating na mas better para sa'yo?",
+  "Kung malaman mo lahat ng flaws ko, pati yung mga bagay na hindi mo gusto sa akin, mamahalin mo pa rin ba ako?",
+  "Kung dumating yung time na kailangan mong mamili between your dreams and our relationship, may chance bang piliin mong mawala ako?",
+  "Kahit may times na napapagod ka na sa akin, gusto mo pa rin bang ayusin natin kaysa sumuko?",
+  "Kung may isang bagay akong nagawa na sobrang sakit para sa'yo, may chance pa rin ba na mapatawad mo ako?",
+  "Kung hindi tayo suportahan ng ibang tao sa relationship natin, kaya mo pa rin ba akong panindigan?",
+  "Kung dumating yung time na hindi na ako yung taong minahal mo noong una, pipiliin mo pa rin ba akong mahalin?",
+  "Kung alam mong hindi magiging madali ang future natin, sure ka pa rin bang ako ang gusto mong makasama habang-buhay? ❤️‍🩹"
+];
+
+const container = document.getElementById("questionsContainer");
+
+questions.forEach((question, index) => {
+  const number = index + 1;
+
+  const item = document.createElement("div");
+  item.className = "question";
+
+  item.innerHTML = `
+    <h3><span class="number">${number}.</span> ${question}</h3>
+
+    <div class="answers">
+      <label class="answer">
+        <input type="radio" name="q${number}" value="Yes" required>
+        Yes 💗
+      </label>
+
+      <label class="answer">
+        <input type="radio" name="q${number}" value="No">
+        No 💔
+      </label>
+    </div>
+
+    <div class="explanation" id="explanation${number}">
+      <label for="reason${number}">
+        Bakit No ang sagot mo, mahal? Please explain. 🥺
+      </label>
+      <textarea
+        id="reason${number}"
+        placeholder="Tell me honestly, mahal..."
+      ></textarea>
+    </div>
+  `;
+
+  container.appendChild(item);
+});
+
+const questionForm = document.getElementById("questionsForm");
+const formError = document.getElementById("formError");
+
+questionForm.addEventListener("change", function(event) {
+  if (!event.target.matches('input[type="radio"]')) return;
+
+  const number = event.target.name.substring(1);
+  const explanation = document.getElementById("explanation" + number);
+  const textarea = document.getElementById("reason" + number);
+
+  if (event.target.value === "No") {
+    explanation.classList.add("show");
+    textarea.required = true;
+  } else {
+    explanation.classList.remove("show");
+    textarea.required = false;
+    textarea.setCustomValidity("");
+  }
+
+  updateProgress();
+});
+
+container.addEventListener("input", function(event) {
+  if (event.target.matches("textarea")) {
+    event.target.setCustomValidity("");
+  }
+});
+
+function updateProgress() {
+  let answered = 0;
+
+  questions.forEach((_, index) => {
+    if (questionForm.querySelector(
+      `input[name="q${index + 1}"]:checked`
+    )) {
+      answered++;
+    }
+  });
+
+  document.getElementById("progress").style.width =
+    (answered / questions.length * 100) + "%";
+
+  document.getElementById("progressText").textContent =
+    `${answered} of ${questions.length} answered`;
+}
+
+questionForm.addEventListener("submit", function(event) {
+  event.preventDefault();
+  formError.textContent = "";
+
+  // All questions must be answered.
+  for (let i = 1; i <= questions.length; i++) {
+    const selected = questionForm.querySelector(
+      `input[name="q${i}"]:checked`
+    );
+
+    if (!selected) {
+      formError.textContent =
+        `Mahal, please answer question ${i} first. 🥺`;
+
+      questionForm.querySelector(
+        `.question:nth-child(${i})`
+      ).scrollIntoView({ behavior: "smooth", block: "center" });
+
+      return;
+    }
+
+    // An explanation is required for every No answer.
+    if (selected.value === "No") {
+      const reason = document.getElementById("reason" + i);
+
+      if (!reason.value.trim()) {
+        formError.textContent =
+          `Mahal, please explain your No sa question ${i}. 💗`;
+
+        reason.focus();
+        reason.scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+      }
+    }
+  }
+
+  // All answers have been completed.
+  document.getElementById("questionsScreen").classList.add("hidden");
+  document.getElementById("letterScreen").classList.remove("hidden");
+
+  window.scrollTo(0, 0);
+});
+
+
+/* ======================================
+   ENVELOPE ANIMATION & LETTER
+====================================== */
+
+const envelope = document.getElementById("envelope");
+const heartButton = document.getElementById("heartButton");
+const letterOverlay = document.getElementById("letterOverlay");
+
+document.getElementById("letterMessage").textContent = LOVE_MESSAGE;
+
+heartButton.addEventListener("click", function() {
+  envelope.classList.add("open");
+
+  // Give the paper time to slide out before showing the full letter.
+  setTimeout(function() {
+    letterOverlay.classList.add("show");
+    document.body.style.overflow = "hidden";
+    createHearts();
+  }, 850);
+});
+
+document.getElementById("closeLetter").addEventListener("click", function() {
+  letterOverlay.classList.remove("show");
+  document.body.style.overflow = "";
+});
+
+letterOverlay.addEventListener("click", function(event) {
+  if (event.target === letterOverlay) {
+    letterOverlay.classList.remove("show");
+    document.body.style.overflow = "";
+  }
+});
+
+
+/* ======================================
+   FLOATING HEARTS
+====================================== */
+
+function createHearts() {
+  const symbols = ["❤️", "💕", "💗", "💖", "💘"];
+
+  for (let i = 0; i < 18; i++) {
+    const heart = document.createElement("div");
+    heart.className = "heart-float";
+    heart.textContent = symbols[
+      Math.floor(Math.random() * symbols.length)
+    ];
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (14 + Math.random() * 20) + "px";
+    heart.style.animationDuration = (4 + Math.random() * 5) + "s";
+    heart.style.animationDelay = (Math.random() * 2) + "s";
+
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 11000);
+  }
+}
+</script>
+
+</body>
+</html>
